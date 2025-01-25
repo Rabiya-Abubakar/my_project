@@ -1,13 +1,48 @@
+// Filename: Login.js
+// This component handles the user login process, including sending login data
+// to the backend, receiving the JWT token, and storing it in localStorage.
+
 import React, { useState } from 'react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState(''); 
+  const [role, setRole] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ role, email, password });
+
+    // Prepare the payload to be sent to the backend
+    const userData = { email, password, role };
+
+    // Send POST request to Flask backend to authenticate the user
+    fetch('http://127.0.0.1:5000/api/v1/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.access_token) {
+          // If authentication is successful, store the token in localStorage
+          localStorage.setItem('access_token', data.access_token);
+          console.log('Token:', data.access_token); // Print token for debugging
+          alert('Login successful!');
+          
+          // Redirect to another page after successful login (example: dashboard)
+          window.location.href = '/dashboard'; // Modify this to your desired route
+        } else {
+          // If login fails, show error message
+          setError('Invalid email or password');
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setError('Something went wrong');
+      });
   };
 
   return (
@@ -56,6 +91,8 @@ const Login = () => {
           <button type="submit">Login</button>
         </div>
       </form>
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <div className="signup-link">
         <p>
