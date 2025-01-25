@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState(''); 
+  const [confirmEmail, setConfirmEmail] = useState('');
+  const [role, setRole] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ role, email, password });
+    console.log({ role, email, confirmEmail });
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+    <div className="signup-container">
+      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="role">Role:</label>
@@ -41,29 +41,23 @@ const Login = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="confirmEmail">Confirm Email:</label>
           <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            type="email"
+            id="confirmEmail"
+            placeholder="Confirm your email"
+            value={confirmEmail}
+            onChange={(e) => setConfirmEmail(e.target.value)}
             required
           />
         </div>
 
         <div className="form-group">
-          <button type="submit">Login</button>
+          <button type="submit">Sign Up</button>
         </div>
       </form>
-
-      <div className="signup-link">
-        <p>
-          Don't have an account? <a href="/signup">Sign Up</a>
-        </p>
-      </div>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;
