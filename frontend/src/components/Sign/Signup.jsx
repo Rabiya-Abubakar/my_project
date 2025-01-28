@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
+// SignUp Component
 const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [confirmEmail, setConfirmEmail] = useState('');
-  const [role, setRole] = useState('');
+  const [email, setEmail] = useState("");
+  const [confirmEmail, setConfirmEmail] = useState("");
+  const [role, setRole] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,6 +56,12 @@ const SignUp = () => {
 
         <div className="form-group">
           <button type="submit">Sign Up</button>
+        </div>
+
+        <div className="signup-link">
+          <p>
+            Already have an account? <Link to="/">Login</Link>
+          </p>
         </div>
       </form>
     </div>
