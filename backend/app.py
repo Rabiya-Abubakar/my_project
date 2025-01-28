@@ -1,51 +1,33 @@
 from flask import Flask, request, jsonify
-from werkzeug.security import generate_password_hash, check_password_hash  # Import both functions
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_migrate import Migrate
 import jwt
 import datetime
 import os
 from dotenv import load_dotenv
-from models import User, db  # Import the User model and db from your models
+from models import db
+from models import User# Assuming User and db are defined in models.py
 
 # Load environment variables from the .env file
 load_dotenv()
 
-# Get the secret key from the environment variables
+# Initialize the Flask app
+app = Flask(__name__)
+
+# Set the secret key for JWT
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 
 if not SECRET_KEY:
     raise ValueError("No JWT_SECRET_KEY set for Flask application.")
 
-# Initialize the Flask app
-app = Flask(__name__)
-app.config['SECRET_KEY'] = SECRET_KEY  # Set the app's secret key
+# Load the database URI from environment variables
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = SECRET_KEY
 
-
-
-app = Flask(__name__)
-
-# Mock data
-parcels = []
-users = []
-# Replace with your actual database models and logic
-
-@app.route('/')
-def home():
-    return "Backend is running"
-
-
-
-# Mock data
-parcels = []
-users_db = {
-    "user@example.com": {
-        "password": generate_password_hash("hashedpassword123"),
-        "role": "user"
-    },
-    "admin@example.com": {
-        "password": generate_password_hash("adminpassword123"),
-        "role": "admin"
-    }
-}
+# Initialize the SQLAlchemy db object
+db.init_app(app)
 
 # Helper function to generate JWT token
 def generate_jwt_token(email, role):
@@ -58,9 +40,8 @@ def generate_jwt_token(email, role):
     return token
 
 @app.route('/')
-def index():
+def home():
     return "Backend is running"
-
 
 @app.route('/api/v1/auth/login', methods=['POST'])
 def login_user():
@@ -68,26 +49,23 @@ def login_user():
     email = data.get('email')
     password = data.get('password')
 
+    # Check if email and password are provided
     if not email or not password:
         return jsonify({"error": "Email and password are required"}), 400
 
-    user = users_db.get(email)
-    if user and check_password_hash(user["password"], password):
-        token = generate_jwt_token(email, user["role"])
-        return jsonify({"message": "Login successful", "token": token, "role": user["role"]}), 200
+    # Check if the user exists in the actual database
+    user = User.query.filter_by(email=email).first()
 
-    
-# Simulate user validation (Replace with your DB logic)
-    if email == "admin@example.com" and password == "adminpassword123" and role == "admin":
-        # Simulate a token (Replace with a JWT in production)
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.fake.payload.token"
-        return jsonify({"message": "Login successful", "token": token})
+    # Validate user credentials
+    if user and check_password_hash(user.password, password):
+        token = generate_jwt_token(email, user.role)
+        return jsonify({
+            "message": "Login successful",
+            "token": token,
+            "role": user.role
+        }), 200
     else:
         return jsonify({"message": "Invalid credentials"}), 401
-
-
-
-
 
 @app.route('/api/v1/auth/signup', methods=['POST'])
 def signup_user():
@@ -99,25 +77,25 @@ def signup_user():
     if not email or not password:
         return jsonify({"error": "Email and password are required"}), 400
 
-    if email in users_db:
+    if User.query.filter_by(email=email).first():
         return jsonify({"error": "Email is already registered"}), 400
 
     hashed_password = generate_password_hash(password)
-    users_db[email] = {
-        "password": hashed_password,
-        "role": role
-    }
+    new_user = User(email=email, password=hashed_password, role=role)
+
+    db.session.add(new_user)
+    db.session.commit()
 
     return jsonify({"message": "User created successfully", "role": role}), 201
 
-
 @app.route('/api/v1/users', methods=['GET'])
 def get_users():
-    users = [{"email": email, "role": user["role"]} for email, user in users_db.items()]
+    users = [{"email": user.email, "role": user.role} for user in User.query.all()]
     return jsonify({"users": users}), 200
 
 
 @app.route('/api/v1/parcels', methods=['POST'])
+
 def create_parcel():
     data = request.get_json()
     origin_pin = data.get('origin_pin')
@@ -205,7 +183,9 @@ def update_parcel_status(parcel_id):
         parcel["status"] = new_status
         return jsonify({"message": "Parcel status updated successfully", "parcel": parcel}), 200
     return jsonify({"error": "Parcel not found"}), 404
-
+migrate = Migrate(app, db)
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()  # Create tables
     app.run(debug=True)
