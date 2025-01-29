@@ -16,4 +16,11 @@ The login screen enables users to log in using their credentials.
 
 ---
 install swagger: pip install flask-swagger-ui
+## Swagger
+
+![Login Screen](swagger1.png)
+
+## Ltesting on swagger
+
+![Login Screen](swagger2.png)
 
