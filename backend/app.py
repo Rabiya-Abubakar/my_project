@@ -8,6 +8,7 @@ import os
 from dotenv import load_dotenv
 from flask_swagger_ui import get_swaggerui_blueprint
 from models import db, User, Parcel, Role 
+from flask_cors import CORS
 
 # Load environment variables from the .env file
 load_dotenv()
