@@ -9,7 +9,9 @@ import UpdateOrderPage from "./pages/UpdateOrderPage";
 import CancelOrderPage from "./pages/CancelOrderPage";
 import TrackOrderPage from "./pages/TrackMyOrderPage";
 import DeliveryDetailsPage from "./pages/DeliveryDetailsPage";
-
+import StatisticsPage from "./pages/StatisticsPage";
+import RecentActivityPage from "./pages/RecentActivityPage";
+import NotificationsPage from "./pages/NotificationsPage";
 
 const App = () => {
   return (
@@ -24,6 +26,9 @@ const App = () => {
           <Route path="/cancelorder" element={<CancelOrderPage />} />
           <Route path="/trackorder" element={<TrackOrderPage />} />
           <Route path="/deliverydetails" element={<DeliveryDetailsPage />} />
+          <Route path="/statistics" element={<StatisticsPage />} />
+          <Route path="/recentactivity" element={<RecentActivityPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
         </Routes>
       </div>
     </Router>

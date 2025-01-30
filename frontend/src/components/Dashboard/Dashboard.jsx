@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom"; // You can use 'react-router-dom' for navigation
 import "./Dashboard.css"; // Import the CSS file
-import createorder from '../../images/createorder.png'
+import createorder from '../../images/order.png'
 import cancelOrder from '../../images/cancelorder.png'
 import updateorder from '../../images/updateorder.png'
 import trackorder from '../../images/trackorder.png'
 import deliverydetails from '../../images/deliverydetails.png'
-// import favicon from './logo192.png'
+import statistics from '../../images/statistics.png'
+import recentactivity from '../../images/recentactivity.png'
+import notifications from '../../images/notifications.png'
+//
+//  import favicon from './logo192.png'
 
 const Dashboard = () => {
   return (
@@ -24,10 +28,12 @@ const Dashboard = () => {
       
 
       <div className="dashboard-content">
-        <div className="card">
-          <h2>Statistics</h2>
-          <p>Overview of your statistics.</p>
-        </div>
+        
+      <Link to='/recentactivity' className="card">
+          <h2>Recent Activity</h2>
+          <p>Overview of your Recent Activity.</p>
+          <img src={recentactivity} alt=" recent activity" />
+        </Link>
         
         <Link to='/createorder' className="card">
           <h2>Create Order</h2>
@@ -60,18 +66,19 @@ const Dashboard = () => {
           <p>Overview of your delivery details.</p>
           <img src={deliverydetails} alt=" delivery details" />
         </Link>
+       
 
-        
+        <Link to= '/statistics' className="card">
+          <h2>Statistic </h2>
+          <p>Statistical data here.</p>
+          <img src={statistics} alt=" statistics" />
+        </Link>
 
-        <div className="card">
-          <h2>Recent Activity</h2>
-          <p>List of recent activities here.</p>
-        </div>
-
-        <div className="card">
+        <Link to= '/notifications' className="card">
           <h2>Notifications</h2>
           <p>Recent notifications will show up here.</p>
-        </div>
+          <img src={notifications} alt=" notifications" />
+          </Link>
       </div>
     </div>
   );
