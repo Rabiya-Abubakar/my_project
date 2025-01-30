@@ -1,0 +1,27 @@
+/* Container for the My Orders page */
+.my-orders-container {
+  max-width: 800px;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.my-orders-container h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.my-orders-container p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Orders list container */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
