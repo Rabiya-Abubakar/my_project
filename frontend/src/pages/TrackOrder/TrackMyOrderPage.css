@@ -1,0 +1,79 @@
+/* Track My Order Page container */
+.track-order-container {
+  max-width: 800px;
+  min-height: 100vh;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.track-order-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.track-order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.track-order-form label {
+  font-size: 16px;
+  color: #333;
+}
+
+.track-order-form input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.track-order-form button {
+  padding: 10px 20px;
+  background-color: #d11470;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.track-order-form button:hover {
+  background-color: #a10e5e;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 16px;
+}
+
+.order-status-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-status-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.order-status-card p {
+  font-size: 16px;
+  color: #555;
+}
+
+.order-status-card strong {
+  font-weight: bold;
+}

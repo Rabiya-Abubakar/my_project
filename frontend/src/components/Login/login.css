@@ -1,0 +1,66 @@
+/* Form container styling */
+.login-container,
+.signup-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px 30px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+}
+
+/* Form header */
+.login-container h2,
+.signup-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form group spacing */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Input and select field styling */
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #00ff00; /* Bright green button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d6f1d6; /* Slightly darker green on hover */
+}
+
+/* Sign-up link styling */
+.signup-link {
+  margin-top: 15px;
+}
+
+.signup-link a {
+  color: #007bff; /* Blue link */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}

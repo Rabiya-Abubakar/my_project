@@ -15,7 +15,7 @@ import notifications from '../../images/notifications.png'
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <header className="dashboard-header">
+      {/* <header className="dashboard-header">
         <div className="header-left">
           <h1>Dashboard</h1>
         </div>
@@ -24,8 +24,7 @@ const Dashboard = () => {
             Login
           </Link>
         </div>
-      </header>
-      
+      </header> */}
 
       <div className="dashboard-content">
         
@@ -41,27 +40,25 @@ const Dashboard = () => {
           <img src={createorder} alt=" create order" />
         </Link>
 
-        <Link to='/updateorder' className="card">
+        <Link to="/updateorder" className="card">
           <h2>Update Order</h2>
           <p>Overview of your Update Order.</p>
           <img src={updateorder} alt=" update order" />
         </Link>
 
-        <Link to= '/cancelorder' className="card">
+        <Link to="/cancelorder" className="card">
           <h2>Cancel Order</h2>
           <p>Overview of your Cancel Order.</p>
-         <img src={cancelOrder} alt="cancel order" /> 
-       </Link>
+          <img src={cancelOrder} alt="cancel order" />
+        </Link>
 
-        <Link to= '/trackorder' className="card">
+        <Link to="/trackorder" className="card">
           <h2>Track Order</h2>
           <p>Overview of your Tracking Order.</p>
           <img src={trackorder} alt="track order" />
         </Link>
 
-        
-
-        <Link to= '/deliverydetails'  className="card">
+        <Link to="/deliverydetails" className="card">
           <h2>Delivery details</h2>
           <p>Overview of your delivery details.</p>
           <img src={deliverydetails} alt=" delivery details" />
