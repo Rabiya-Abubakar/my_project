@@ -14,8 +14,14 @@ from flask_cors import CORS
 load_dotenv()
 
 # Initialize the Flask app
+<<<<<<< HEAD
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
+=======
+app = Flask(__name__) 
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+>>>>>>> 73de15b530f4a8867fba7eeef0f6bd017461d0de
 
 # Load the database URI and secret key from environment variables
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')

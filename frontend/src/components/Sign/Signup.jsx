@@ -16,7 +16,7 @@ const SignUp = () => {
     <div className="signup-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="role">Role:</label>
           <select
             id="role"
@@ -28,7 +28,7 @@ const SignUp = () => {
             <option value="client">Client</option>
             <option value="admin">Admin</option>
           </select>
-        </div>
+        </div> */}
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
