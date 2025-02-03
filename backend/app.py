@@ -14,7 +14,9 @@ from flask_cors import CORS
 load_dotenv()
 
 # Initialize the Flask app
-app = Flask(__name__)
+app = Flask(__name__) 
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 
 # Load the database URI and secret key from environment variables
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
@@ -51,7 +53,7 @@ def generate_jwt_token(email, role):
 @app.route('/')
 def home():
     # return "Backend is running"
-    return redirect(url_for('swaggerui_blueprint.swagger_ui'))
+    return redirect(url_for('swagger_ui.show'))
 
 
 @app.route('/api/v1/auth/login', methods=['POST'])
