@@ -15,6 +15,7 @@ load_dotenv()
 
 # Initialize the Flask app
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # Load the database URI and secret key from environment variables
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
@@ -51,7 +52,7 @@ def generate_jwt_token(email, role):
 @app.route('/')
 def home():
     # return "Backend is running"
-    return redirect(url_for('swaggerui_blueprint.swagger_ui'))
+    return redirect(url_for('swagger_ui.show'))
 
 
 @app.route('/api/v1/auth/login', methods=['POST'])
@@ -74,6 +75,10 @@ def login_user():
         }), 200
 
     return jsonify({"message": "Invalid credentials"}), 401
+# logout
+@app.route('/api/v1/auth/logout', methods=['POST'])
+def logout_user():
+    return jsonify({"message": "Logout successful"}), 200
 
 
 @app.route('/api/v1/auth/signup', methods=['POST'])
@@ -96,13 +101,24 @@ def signup_user():
         db.session.add(role)
         db.session.commit()
 
+    # Generate User or Admin ID
+    if role_name == 'user':
+        last_user = User.query.filter(User.id.like('U%')).order_by(User.id.desc()).first()
+        new_user_id = f'U{int(last_user.id[1:]) + 1}' if last_user else 'U1'
+    elif role_name == 'admin':
+        last_admin = User.query.filter(User.id.like('A%')).order_by(User.id.desc()).first()
+        new_user_id = f'A{int(last_admin.id[1:]) + 1}' if last_admin else 'A1'
+    else:
+        return jsonify({"error": "Invalid role"}), 400
+
     hashed_password = generate_password_hash(password)
-    new_user = User(email=email, password=hashed_password, role_id=role.id)
+    new_user = User(id=new_user_id, email=email, password=hashed_password, role_id=role.id)  # Explicitly setting the ID
 
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"message": "User created successfully", "role": role_name}), 201
+    return jsonify({"message": "User created successfully", "role": role_name, "user_id": new_user_id}), 201
+
 
 
 

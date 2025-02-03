@@ -15,10 +15,9 @@ class Role(db.Model):
         return f'<Role {self.name}>'
 
 
-# Define User Model
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(10), primary_key=True)  # Change to string to hold custom ID format
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)  # Hashed password
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False)  # Foreign key to Role table
@@ -28,7 +27,6 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.email}>'
-
 
 # Define Parcel Model
 class Parcel(db.Model):
@@ -40,8 +38,8 @@ class Parcel(db.Model):
     description = db.Column(db.String(255), nullable=False)
     status = db.Column(db.String(50), default='created', nullable=False)
 
-    # Foreign key to User table
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.String(10), db.ForeignKey('users.id'), nullable=False)  # Change to String(10)
+
 
     def __repr__(self):
         return f'<Parcel ID {self.id} | Origin: {self.origin_pin} | Destination: {self.destination_pin}>'
