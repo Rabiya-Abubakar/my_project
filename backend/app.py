@@ -168,7 +168,7 @@ def create_parcel():
     }}), 201
 
 
-@app.route('/api/v1/users/<int:user_id>/parcels', methods=['GET'])
+@app.route('/api/v1/users/<string:user_id>/parcels', methods=['GET'])
 def get_user_parcels(user_id):
     user = User.query.get(user_id)
     if not user:
