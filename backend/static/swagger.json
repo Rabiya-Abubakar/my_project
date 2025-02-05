@@ -107,6 +107,14 @@
           }
         }
       },
+      "/get-parcels": {
+        "get": {
+          "summary": "Get all parcels",
+          "responses": {
+            "200": { "description": "List of parcels" }
+          }
+        }
+      },
       "/parcels/{parcel_id}": {
         "get": {
           "summary": "Get parcel by ID",

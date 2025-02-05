@@ -283,6 +283,21 @@ def update_parcel(parcel_id):
             "status": parcel.status
         }
     }), 200
+# get all parcels
+@app.route('/api/v1/get-parcels', methods=['GET'])
+def get_all_parcels():
+    parcels = Parcel.query.all()
+    return jsonify({
+        "parcels": [{
+            "id": parcel.id,
+            "origin_pin": parcel.origin_pin,
+            "destination_pin": parcel.destination_pin,
+            "weight_kg": parcel.weight_kg,
+            "description": parcel.description,
+            "status": parcel.status
+        } for parcel in parcels]
+    }), 200
+
 
 # main
 if __name__ == '__main__':
