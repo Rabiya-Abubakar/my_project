@@ -39,8 +39,9 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 # Helper function to generate JWT token
-def generate_jwt_token(email, role):
+def generate_jwt_token(user_id, email, role):
     payload = {
+        "user_id": user_id,
         "email": email,
         "role": role,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)
@@ -67,10 +68,11 @@ def login_user():
     user = User.query.filter_by(email=email).first()
 
     if user and check_password_hash(user.password, password):
-        token = generate_jwt_token(email, user.role.name)
+        token = generate_jwt_token(user.id, email, user.role.name)
         return jsonify({
             "message": "Login successful",
             "token": token,
+            "user_id": user.id,
             "role": user.role.name
         }), 200
 
