@@ -234,6 +234,11 @@ def update_parcel_status(parcel_id):
     if not new_status:
         return jsonify({"error": "New status is required"}), 400
 
+    # Restrict status updates to "canceled" or "delivered" only
+    allowed_statuses = ["canceled", "delivered"]
+    if new_status not in allowed_statuses:
+        return jsonify({"error": f"Invalid status. Allowed values: {allowed_statuses}"}), 400
+
     parcel = Parcel.query.get(parcel_id)
     if not parcel:
         return jsonify({"error": "Parcel not found"}), 404
@@ -245,6 +250,39 @@ def update_parcel_status(parcel_id):
         "id": parcel.id,
         "status": parcel.status
     }}), 200
+
+# endpoint for updating parcel details
+@app.route('/api/v1/parcels/<int:parcel_id>', methods=['PUT'])
+def update_parcel(parcel_id):
+    data = request.get_json()
+    
+    parcel = Parcel.query.get(parcel_id)
+    if not parcel:
+        return jsonify({"error": "Parcel not found"}), 404
+
+    # Allow updating only certain fields
+    if 'origin_pin' in data:
+        parcel.origin_pin = data['origin_pin']
+    if 'destination_pin' in data:
+        parcel.destination_pin = data['destination_pin']
+    if 'weight_kg' in data:
+        parcel.weight_kg = data['weight_kg']
+    if 'description' in data:
+        parcel.description = data['description']
+
+    db.session.commit()
+
+    return jsonify({
+        "message": "Parcel details updated successfully",
+        "parcel": {
+            "id": parcel.id,
+            "origin_pin": parcel.origin_pin,
+            "destination_pin": parcel.destination_pin,
+            "weight_kg": parcel.weight_kg,
+            "description": parcel.description,
+            "status": parcel.status
+        }
+    }), 200
 
 # main
 if __name__ == '__main__':

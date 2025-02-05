@@ -36,7 +36,7 @@ class Parcel(db.Model):
     destination_pin = db.Column(db.String(10), nullable=False)
     weight_kg = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    status = db.Column(db.String(50), default='created', nullable=False)
+    status = db.Column(db.String(50), default='pending', nullable=False)
 
     user_id = db.Column(db.String(10), db.ForeignKey('users.id'), nullable=False)  # Change to String(10)
 
