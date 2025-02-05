@@ -1,6 +1,7 @@
 /* Container for the My Orders page */
 .my-orders-container {
-  max-width: 800px;
+  max-width: 1000px;
+  min-height: 100vh;
   margin: 10px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -19,9 +20,53 @@
   margin-bottom: 20px;
 }
 
+/* Buttons container */
+.buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.buttons-container button {
+  color: white;
+  background-color: #490827;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.buttons-container button:hover {
+  background-color: #800d47;
+}
+
+/* Highlight the active button */
+.buttons-container button.active {
+  background-color: #800d47;
+  font-weight: bold;
+}
+
 /* Orders list container */
 .orders-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  padding-top: 20px;
+}
+
+.orders-list a {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .orders-list {
+    grid-template-columns: 1fr 1fr; /* Two columns on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .orders-list {
+    grid-template-columns: 1fr; /* One column on very small screens */
+  }
 }

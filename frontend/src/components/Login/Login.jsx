@@ -32,12 +32,18 @@ const Login = () => {
 
         const data = await response.json();
 
+        console.log(data)
+
         if (response.ok) {
           // Assume token is returned on success
           const token = data.token;
+          const user_id = data.user_id;
+          const role = data.role;
           if (token) {
             // Store the token in localStorage or sessionStorage
             localStorage.setItem("authToken", token);
+            localStorage.setItem("user_id", user_id);
+            localStorage.setItem("user_role", role)
 
             // Handle successful login, e.g., redirect the user to a dashboard
             console.log("Login successful");

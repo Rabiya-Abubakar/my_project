@@ -55,6 +55,9 @@ import CreateOrderPage from "./pages/createorder/CreateOrderPage";
 import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage";
 import OrderDetailsPage from "./pages/orderDetailsPage/OrderDetailsPage";
 import TrackMyOrderPage from "./pages/TrackOrder/TrackMyOrderPage";
+import OrdersPage from "./pages/ordersPage/OrdersPage";
+import OrderDetailsAdm from "./pages/OrderDetailsAdm/OrderDetailsAdm";
+import UsersPage from "./pages/AllUsers/AllUsers";
 
 const AppContent = () => {
   const location = useLocation(); // Get current route
@@ -66,9 +69,12 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/users" element={<UsersPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/myorders" element={<MyOrdersPage />} />
-        <Route path="/orderdetails/:orderId" element={<OrderDetailsPage />} />
+        <Route path="/parcels/:orderId" element={<OrderDetailsPage />} />
+        <Route path="/parcelsadm/:orderId" element={<OrderDetailsAdm />} />
         <Route path="/createorder" element={<CreateOrderPage />} />
         <Route path="/updateorder" element={<UpdateOrderPage />} />
         <Route path="/trackorder" element={<TrackMyOrderPage />} />

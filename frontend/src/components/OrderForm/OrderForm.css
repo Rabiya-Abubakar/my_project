@@ -1,0 +1,37 @@
+/* /* Styling for each individual order card */
+.order-card {
+  background-color: white;
+  width: 90%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 300px;
+  margin: 15px auto;
+  border-left: 5px solid #d32f2f; /* Red accent for emphasis */
+}
+
+.order-card:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.order-card h3 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #d32f2f; /* Red theme */
+  text-align: center;
+  border-bottom: 2px solid #d32f2f;
+  padding-bottom: 5px;
+}
+
+.order-card p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.order-card strong {
+  font-weight: bold;
+  color: #222;
+}

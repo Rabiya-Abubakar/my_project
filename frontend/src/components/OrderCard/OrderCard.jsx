@@ -6,13 +6,19 @@ const OrderCard = ({ order }) => {
     <div className="order-card">
       <h3>Order ID: {order.id}</h3>
       <p>
-        <strong>Parcel Origin:</strong> {order.parcelOrigin}
+        <strong>Origin PIN:</strong> {order.origin_pin}
       </p>
       <p>
-        <strong>Destination:</strong> {order.destination}
+        <strong>Destination PIN:</strong> {order.destination_pin}
+      </p>
+      <p>
+        <strong>Weight (kg):</strong> {order.weight_kg}
       </p>
       <p>
         <strong>Description:</strong> {order.description}
+      </p>
+      <p>
+        <strong>Status:</strong> {order.status}
       </p>
     </div>
   );

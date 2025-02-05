@@ -1,6 +1,7 @@
 /* Container for the Create Order page */
 .create-order-container {
   max-width: 600px;
+  min-height: 100vh;
   margin: 10px auto;
   padding: 20px;
   text-align: center;
