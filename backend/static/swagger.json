@@ -79,7 +79,7 @@
                   "destination_pin": { "type": "string" },
                   "weight_kg": { "type": "number" },
                   "description": { "type": "string" },
-                  "user_id": { "type": "integer" }
+                  "user_id": { "type": "string" }
                 }
               }
             }
@@ -98,7 +98,7 @@
               "name": "user_id",
               "in": "path",
               "required": true,
-              "type": "integer"
+              "type": "string"
             }
           ],
           "responses": {
@@ -141,6 +141,37 @@
           }
         }
       },
+      "/parcel/{parcel_id}": {
+      "put": {
+        "summary": "Update parcel details",
+        "parameters": [
+          {
+            "name": "parcel_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "origin_pin": { "type": "string" },
+                "destination_pin": { "type": "string" },
+                "weight_kg": { "type": "number" },
+                "description": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Parcel details updated successfully" },
+          "404": { "description": "Parcel not found" }
+        }
+      }
+    },
       "/parcels/{parcel_id}/status": {
         "put": {
           "summary": "Update parcel status (Admin only)",

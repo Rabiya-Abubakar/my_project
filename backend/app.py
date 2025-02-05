@@ -252,7 +252,7 @@ def update_parcel_status(parcel_id):
     }}), 200
 
 # endpoint for updating parcel details
-@app.route('/api/v1/parcels/<int:parcel_id>', methods=['PUT'])
+@app.route('/api/v1/parcel/<int:parcel_id>', methods=['PUT'])
 def update_parcel(parcel_id):
     data = request.get_json()
     
